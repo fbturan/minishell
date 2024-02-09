@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/15 08:47:27 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:14:00 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,6 @@ int	ft_is_single_quote(char *str)
 	return (0);
 }
 
-char	*ft_substring(char *str, int start, int end)
-{
-	char	*sub;
-	int		index;
-
-	index = 0;
-	if (end >= ft_strlen(str))
-		return (0);
-	sub = (char *)malloc(sizeof(char) * end - start + 2);
-	sub[end - start + 1] = '\0';
-	while (start <= end)
-		sub[index++] = str[start++];
-	return (sub);
-}
-
 char	**ft_create_split(char *str)
 {
 	char	**split;
@@ -70,11 +55,39 @@ char	**ft_create_split(char *str)
 	{
 		temp = index;
 		pass_word(str, &index, &temp);
-		split[split_index++] = ft_substring(str, temp - 1, index - 1);
+		split[split_index++] = ft_substr(str, temp - 1, index - 1);
 		pass_whitespaces(str, &index);
 	}
 	split[split_index] = 0;
 	return (split);
+}
+
+void	check_env(t_parser *parser)
+{
+	while (parser != NULL)
+	{
+		if (ft_find_char(parser->str, '$'))
+			parser->str = create_env(parser->str);
+		parser = parser->next;
+	}
+}
+
+void	init_envair(char **env)
+{
+	int	i;
+
+	i = ft_strlen_split(env);
+	g_glbl.env = malloc(sizeof(char *) * (i + 1));
+	g_glbl.export = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		g_glbl.env[i] = ft_strdup(env[i]);
+		g_glbl.export[i] = ft_strdup(env[i]);
+		i++;
+	}
+	g_glbl.env[i] = NULL;
+	g_glbl.export[i] = NULL;
 }
 
 void	ft_process(void)
@@ -82,8 +95,8 @@ void	ft_process(void)
 	t_parser	*parser;
 	char		**split;
 	char		*str;
-	char		*temp;
 
+	//ft_print_split(g_glbl.export);
 	while (1)
 	{
 		str = readline("bash$: ");
@@ -92,7 +105,25 @@ void	ft_process(void)
 		split = ft_create_split(str);
 		parser = ft_createnodes(split);
 		determine_type(parser);
+		check_env(parser);
 		remove_quo_pars(parser);
-		ft_printlist(parser);
+		//ft_printlist(parser);
+		ft_cmd_box(parser);
+		
+		while (g_glbl.cmd)
+		{
+			while (g_glbl.cmd->exec)
+			{
+				printf("exec:%s\n", g_glbl.cmd->exec->value);
+				g_glbl.cmd->exec = g_glbl.cmd->exec->next;
+			}
+			while (g_glbl.cmd->redirect)
+			{
+				printf("redire:%s\n", g_glbl.cmd->redirect->value);
+				g_glbl.cmd->redirect = g_glbl.cmd->redirect->next;
+			}
+			g_glbl.cmd = g_glbl.cmd->next;
+			printf("bir sonraki pipe");
+		}
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list_utils1.c                               :+:      :+:    :+:   */
+/*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:04:53 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/10/23 23:57:37 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:04:52 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_parser	*ft_nodelast(t_parser	*pars)
 {
-	while (pars->next != NULL)
+	while (pars != NULL && pars->next != NULL)
 		pars = pars->next;
 	return (pars);
 }
@@ -50,7 +50,21 @@ t_parser	*ft_createnodes(char **str)
 	parser = NULL;
 	while (str[++index])
 		ft_nodeadd_back(&parser, ft_nodenew(ft_strdup(str[index])));
+	ft_add_prev_parser(parser);
 	return (parser);
+}
+
+void	ft_add_prev_parser(t_parser	*parser)
+{
+	t_parser	*temp;
+
+	temp = NULL;
+	while (parser)
+	{
+		parser->prev = temp;
+		temp = parser;
+		parser = parser->next;
+	}
 }
 
 int	ft_arg_count(t_parser *main)

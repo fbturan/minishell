@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 22:24:09 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/14 08:49:14 by kpolatci         ###   ########.fr       */
+/*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
+/*   Updated: 2024/01/28 10:26:53 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
+	init_envair(env);
 	ft_process();
 }

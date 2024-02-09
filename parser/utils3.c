@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:47:15 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/14 06:36:23 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:40:35 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-int	ft_strlen2(char **str)
+int	ft_strlen_split(char **str)
 {
 	int	len;
 
@@ -47,22 +47,6 @@ void	ft_strlcpy(char *src, char *dst, int size)
 	dst[index] = '\0';
 }
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*join;
-
-	join = malloc(sizeof(char *) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!join)
-		return (0);
-	if (s1)
-		ft_strlcpy(s1, join, ft_strlen(s1));
-	if (s2)
-		ft_strlcpy(s2, join + ft_strlen(s1), ft_strlen(s2));
-	free(s1);
-	free(s2);
-	return (join);
-}
-
 char	*ft_strdup(char *str)
 {
 	char	*dup;
@@ -72,4 +56,15 @@ char	*ft_strdup(char *str)
 		return (0);
 	ft_strlcpy(str, dup, ft_strlen(str));
 	return (dup);
+}
+
+int	ft_find_char(char *str, char c)
+{
+	while ((*str))
+	{
+		if ((*str) == c)
+			return (1);
+		str++;
+	}
+	return (0);
 }
