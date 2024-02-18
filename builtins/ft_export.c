@@ -12,20 +12,39 @@
 
 #include "../minishell.h"
 
-int	ft_is_equal(char *env, char *exp)
+int	ft_sub_equal(char *s1, char *s2, int *i, int *j)
+{
+	while (s1[*i] == s2[*j] && s1[*i] && s2[*j])
+	{
+		if (s1[*i])
+			*i++;
+		if (s2[*j])
+			*j++;
+	}
+	if (s1[*i] == '\0' && s2[*j] == '\0')
+		return (1);
+	return (0);
+}
+
+int	ft_is_equal(char *s1, char *s2)
 {
 	int	i;
 	int	j;
 
-	if (!env)
+	if (!s1)
 		return (0);
 	i = 0;
-	j = 0;
-	while (env[i])
+	while (s1[i])
 	{
-
+		j = 0;
+		if (s1[i] == s2[j])
+		{
+			if (ft_sub_equal(s1, s2, &i, &j))
+				return (1);
+		}
+		j++;
 	}
-
+	return (0);
 }
 
 int	ft_if_equal(char **new, int *i, char *value, char *flag)

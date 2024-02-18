@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/30 13:31:01 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:27:27 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_glbl
 	char				**export;
 	t_command			*cmd;
 	int					exp_plus_flag;
+	int					cmd_count;
 }						t_glbl;
 
 t_glbl			g_glbl;
@@ -87,12 +88,13 @@ t_execute		*ft_exec_box(t_execute **exec, t_parser *main);
 t_redirect		*ft_redirect_box(t_redirect **redirect, t_parser *main);
 
 // builtins
-void		ft_echo(t_parser *main);
+void		ft_echo(t_command *cmd);
 void		ft_pwd(void);
-void		ft_exit(t_parser *main);
+void		ft_exit(t_command *cmd);
 void		ft_print_export(void);
 int			ft_exec_count(t_execute *exec);
 int			ft_check_err(char *value, char *flag);
+int			ft_is_equal(char *s1, char *s2);
 
 // env
 char		*create_env(char *node_str);
@@ -158,4 +160,8 @@ void		remove_quo_pars(t_parser *pars);
 char		*ft_removed(char *str);
 int			ft_count_for_rem(char *str);
 void		determine_type(t_parser *pars);
+
+//exec
+void	ft_process_cmd(void);
+
 #endif

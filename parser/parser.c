@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/28 15:14:00 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:30:22 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,21 +109,22 @@ void	ft_process(void)
 		remove_quo_pars(parser);
 		//ft_printlist(parser);
 		ft_cmd_box(parser);
+		ft_process_cmd();
 		
-		while (g_glbl.cmd)
-		{
-			while (g_glbl.cmd->exec)
-			{
-				printf("exec:%s\n", g_glbl.cmd->exec->value);
-				g_glbl.cmd->exec = g_glbl.cmd->exec->next;
-			}
-			while (g_glbl.cmd->redirect)
-			{
-				printf("redire:%s\n", g_glbl.cmd->redirect->value);
-				g_glbl.cmd->redirect = g_glbl.cmd->redirect->next;
-			}
-			g_glbl.cmd = g_glbl.cmd->next;
-			printf("bir sonraki pipe");
-		}
+		//while (g_glbl.cmd)
+		//{
+		//	while (g_glbl.cmd->exec)
+		//	{
+		//		printf("exec:%s\n", g_glbl.cmd->exec->value);
+		//		g_glbl.cmd->exec = g_glbl.cmd->exec->next;
+		//	}
+		//	while (g_glbl.cmd->redirect)
+		//	{
+		//		printf("redire:%s\n", g_glbl.cmd->redirect->value);
+		//		g_glbl.cmd->redirect = g_glbl.cmd->redirect->next;
+		//	}
+		//	g_glbl.cmd = g_glbl.cmd->next;
+		//	printf("bir sonraki pipe");
+		//}
 	}
 }

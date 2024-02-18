@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 12:32:45 by fatturan          #+#    #+#             */
-/*   Updated: 2024/01/28 13:00:46 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:33:04 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	ft_cmd_box(t_parser *main)
 				main = main->next;
 			cmd = ft_init_cmd();
 			ft_add_box(cmd);
+			g_glbl.cmd_count++;
 		}
 		ft_send_box(cmd, &main);
 		main = main->next;
 	}
+	g_glbl.cmd = cmd;
 }

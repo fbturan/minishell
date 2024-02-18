@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:56:33 by fatturan          #+#    #+#             */
-/*   Updated: 2023/12/25 15:08:08 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:48:14 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,27 @@ static int	ft_exit_nbr(char *str)
 }
 
 //3 durum var sadece exit yazılması 2den fazla arg olması non-numeric olma durumu
-void	ft_exit(t_parser *main)
+void	ft_exit(t_command *cmd)
 {
-	if (ft_arg_count(main) == 1)
-		//globalli falan
-		main->next;//öylesine
-	else if (ft_arg_count(main) > 2)
+	if (ft_arg_count(cmd->exec) == 1)
 	{
-		ft_putendl_fd("exit\n exit: too many arguments", 2);
-		//errno = 1;
-		return ;
+		printf("exit\n");
+		//exit(errno);
 	}
 	else
 	{
-		if (ft_exit_nbr(main->next->str))
+		if (ft_exit_nbr(cmd->exec->next->value))
 		{
-			ft_putendl_fd("exit\n", 1);
-			exit(ft_atoi(main->next->str) % 256);
+			if (ft_arg_count(cmd->exec) > 1)
+			{
+				write(2, "exit\n exit: too many arguments\n", 41);
+				//errno = 1;
+				return ;
+			}
+			printf("exit\n");
+			exit(ft_atoi(cmd->exec->next->value) % 256);
 		}
-		ft_putendl_fd("exit\n exit: numeric argument required\n", 2);
+		write (2, "exit\n exit: numeric argument required\n", 39);
 		exit(-1 % 256);
 	}
 }

@@ -6,49 +6,49 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:56:23 by fatturan          #+#    #+#             */
-/*   Updated: 2023/12/18 16:56:25 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:20:52 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_parser *ft_check_n(t_parser *main, int *flag)
+t_command *ft_check_n(t_command *cmd, int *flag)
 {
 	int	i;
 
-	while(main != NULL)
+	while(cmd != NULL)
 	{
 		i = 0;
-		while(main->str[i])
+		while(cmd->exec->value[i])
 		{
-			if (i == 0 && main->str[0] != '-')
+			if (i == 0 && cmd->exec->value[0] != '-')
 				break;
-			else if (i != 0 && main->str[i] != 'n')
+			else if (i != 0 && cmd->exec->value[i] != 'n')
 				break;
 			i++;
 		}
-		if (main->str[i] == '\0')
+		if (cmd->exec->value[i] == '\0')
 			*flag = 1;
-		if(main->str[i])
-			return(main);
-		main = main->next;
+		if(cmd->exec->value[i])
+			return(cmd);
+		cmd = cmd->next;
 	}
-	return(main);
+	return(cmd);
 }
 
-void	ft_echo(t_parser *main)
+void	ft_echo(t_command *cmd)
 {
 	int	flag;
 
 	flag = 0;
 	
-		main = ft_check_n(main->next, &flag);
-	if (main != NULL)
+		cmd = ft_check_n(cmd->next, &flag);
+	if (cmd != NULL)
 	{
-		while (main != NULL && main->type != PIPE)
+		while (cmd != NULL && cmd->exec->value)
 		{
-			printf("%s", main->str);
-			main = main->next;
+			printf("%s", cmd->exec->value);
+			cmd = cmd->next;
 		}
 		if (!flag)
 			printf("\n");
