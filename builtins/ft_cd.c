@@ -6,13 +6,13 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:56:17 by fatturan          #+#    #+#             */
-/*   Updated: 2024/02/18 19:11:20 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:04:49 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_env_pwd(char *old_pwd, char *new_pwd)
+void	ft_export_pwd(char *old_pwd, char *new_pwd)
 {
 	int	i;
 
@@ -89,7 +89,7 @@ void	ft_cd(t_command *cmd)
 {
 	char *home;
 
-	if (cmd->exec->next == '\0')
+	if (cmd->exec->next == NULL)
 	{
 		home = getenv("HOME");
 		if (home && *home)

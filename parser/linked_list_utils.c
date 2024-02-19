@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:04:53 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/06 16:04:52 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:07:07 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ void	ft_add_prev_parser(t_parser	*parser)
 	}
 }
 
-int	ft_arg_count(t_parser *main)
+int	ft_arg_count(t_execute *exec)
 {
 	int	len;
 
 	len = 0;
-	while (main->next)
+	while (exec->next)
 	{
 		len++;
-		main = main->next;
+		exec = exec->next;
 	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:56:33 by fatturan          #+#    #+#             */
-/*   Updated: 2024/02/09 15:48:14 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:05:57 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_exit_nbr(char *str)
 	while (*str)
 	{
 		if ((ft_isdigit(*str)) || (*str == '+') || (*str == '-'))
-			*str++;
+			(*str)++;
 		return (0);
 	}
 	return (1); 

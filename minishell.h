@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/02/18 15:27:27 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:09:33 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void		init_envair(char **env);
 void		*ft_calloc(int count, int size);
 char		**ft_split(char *s, char c);
 char		*ft_strchr(char *s, int c);
+char		*ft_strjoin(char *s1, char *s2);
+int			ft_strncmp(char *str1, char *str2, int n);
+int			ft_isdigit(int c);
+int			ft_atoi(char *str);
 
 //box
 void			ft_cmd_box(t_parser *main);
@@ -88,9 +92,14 @@ t_execute		*ft_exec_box(t_execute **exec, t_parser *main);
 t_redirect		*ft_redirect_box(t_redirect **redirect, t_parser *main);
 
 // builtins
+void		ft_cd(t_command *cmd);
 void		ft_echo(t_command *cmd);
-void		ft_pwd(void);
+void		ft_env(t_execute *exec);
 void		ft_exit(t_command *cmd);
+void		ft_export(t_command *command);
+void		ft_pwd(void);
+void		ft_unset(t_command *cmd);
+
 void		ft_print_export(void);
 int			ft_exec_count(t_execute *exec);
 int			ft_check_err(char *value, char *flag);
@@ -120,7 +129,7 @@ void		ft_nodeadd_back(t_parser **pars, t_parser *new);
 t_parser	*ft_nodenew(char *str);
 t_parser	*ft_createnodes(char **str);
 void		ft_add_prev_parser(t_parser	*parser);
-int			ft_arg_count(t_parser *main);
+int			ft_arg_count(t_execute *exec);
 
 // parser
 int			ft_is_single_quote(char *str);

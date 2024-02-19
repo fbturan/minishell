@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:48:54 by fatturan          #+#    #+#             */
-/*   Updated: 2024/02/18 19:15:27 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:12:33 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ int	ft_process_builtins(t_command *cmd)
 	tmp_cmd = cmd;
 	if (tmp_cmd == NULL)
 		return (0);
-	else if (ft_is_equal(cmd->exec->value, "cd"))
-		ft_cd(tmp_cmd);
-	else if (ft_is_equal(cmd->exec->value, "echo"))
-		ft_echo(tmp_cmd);
-	else if (ft_is_equal(cmd->exec->value, "env"))
-		ft_env(tmp_cmd->exec);
-	else if (ft_is_equal(cmd->exec->value, "exit"))
-		ft_exit(tmp_cmd);
-	else if (ft_is_equal(cmd->exec->value, "export"))
-		ft_export(tmp_cmd);
+	//else if (ft_is_equal(cmd->exec->value, "cd"))
+	//	ft_cd(tmp_cmd);
+	//else if (ft_is_equal(cmd->exec->value, "echo"))
+	//	ft_echo(tmp_cmd);
+	//else if (ft_is_equal(cmd->exec->value, "env"))
+	//	ft_env(tmp_cmd->exec);
+	//else if (ft_is_equal(cmd->exec->value, "exit"))
+	//	ft_exit(tmp_cmd);
+	//else if (ft_is_equal(cmd->exec->value, "export"))
+	//	ft_export(tmp_cmd);
 	else if (ft_is_equal(cmd->exec->value, "pwd"))
 		ft_pwd();
-	else if (ft_is_equal(cmd->exec->value, "unset"))
-		ft_unset(tmp_cmd);
+	//else if (ft_is_equal(cmd->exec->value, "unset"))
+	//	ft_unset(tmp_cmd);
 	else
 		return (0);
 	return (1);
@@ -54,20 +54,20 @@ void	ft_run_builtins(t_command *cmd)
 
 int	ft_is_builtin(t_command *cmd)
 {
-	if (ft_is_equal(cmd->exec->value, "cd"))
+	//if (ft_is_equal(cmd->exec->value, "cd"))
+	//	return (1);
+	//else if (ft_is_equal(cmd->exec->value, "echo"))
+	//	return (1);
+	//else if (ft_is_equal(cmd->exec->value, "env"))
+	//	return (1);
+	//else if (ft_is_equal(cmd->exec->value, "exit"))
+	//	return (1);
+	//else if (ft_is_equal(cmd->exec->value, "export"))
+	//	return (1);
+	 if (ft_is_equal(cmd->exec->value, "pwd"))
 		return (1);
-	else if (ft_is_equal(cmd->exec->value, "echo"))
-		return (1);
-	else if (ft_is_equal(cmd->exec->value, "env"))
-		return (1);
-	else if (ft_is_equal(cmd->exec->value, "exit"))
-		return (1);
-	else if (ft_is_equal(cmd->exec->value, "export"))
-		return (1);
-	else if (ft_is_equal(cmd->exec->value, "pwd"))
-		return (1);
-	else if (ft_is_equal(cmd->exec->value, "unset"))
-		return (1);
+	//else if (ft_is_equal(cmd->exec->value, "unset"))
+	//	return (1);
 	return (0);
 }
 
@@ -81,7 +81,7 @@ void	ft_process_cmd(void)
 	if (cmd->exec && g_glbl.cmd_count == 1 && ft_is_builtin(cmd))
 	{
 		ft_run_builtins(cmd);
-		cmd = cmd->next;
+		//cmd = cmd->next;
 	}
 	//while (cmd)
 	//{

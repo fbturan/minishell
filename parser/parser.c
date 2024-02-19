@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/02/18 15:30:22 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:18 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_process(void)
 		remove_quo_pars(parser);
 		//ft_printlist(parser);
 		ft_cmd_box(parser);
+		//printf("%d\n", g_glbl.cmd_count);
 		ft_process_cmd();
 		
 		//while (g_glbl.cmd)
@@ -124,7 +125,7 @@ void	ft_process(void)
 		//		g_glbl.cmd->redirect = g_glbl.cmd->redirect->next;
 		//	}
 		//	g_glbl.cmd = g_glbl.cmd->next;
-		//	printf("bir sonraki pipe");
+		//	printf("bir sonraki pipe		");
 		//}
 	}
 }
