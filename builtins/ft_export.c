@@ -63,8 +63,8 @@ int	ft_if_equal(char **new, int *i, char *value, char *flag)
 		else if (ft_is_equal(flag, "export"))
 			return (2);
 	}
-	ft_free_2D(env);
-	ft_free_2D(value_d);
+	ft_free_2d(env);
+	ft_free_2d(value_d);
 	return (0);
 }
 
@@ -86,7 +86,7 @@ void	ft_add_exp(char **new_exp, char *value)
 		new_exp[i] = ft_strdup(value);
 		new_exp[i + 1] = NULL;
 	}
-	ft_free_2D(g_glbl.export);
+	ft_free_2d(g_glbl.export);
 	g_glbl.export = new_exp;
 }
 
@@ -108,7 +108,7 @@ void	ft_add_env(char **new_env, char *value)
 		new_env[i] = ft_strdup(value);
 		new_env[i + 1] = NULL;
 	}
-	ft_free_2D(g_glbl.env);
+	ft_free_2d(g_glbl.env);
 	g_glbl.env = new_env;
 }
 
@@ -198,7 +198,7 @@ void	ft_print_export(void)
 			printf("declare -x %s=\"%s\"\n", arg[0], arg[1]);
 		i++;
 	}
-		ft_free_2D(arg);
+		ft_free_2d(arg);
 }
 
 void	ft_export(t_command *command) //neden exec almadık da cmd aldık = norm

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_box.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:04:49 by fatturan          #+#    #+#             */
-/*   Updated: 2024/01/28 12:52:34 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:16:15 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_redirect	*ft_last_redirect(t_redirect *redirect)
 
 void	ft_add_redirect_box(t_redirect **redirect, t_redirect *new)
 {
-	t_redirect *temp;
+	t_redirect	*temp;
 
 	if (redirect)
 	{
@@ -60,9 +60,9 @@ t_redirect	*ft_redirect_box(t_redirect **redirect, t_parser *main)
 	else if (main->type == INPUT_R && main->next->str)
 		new_redirect = ft_init_redirect_box(OUT_FILE, main->next->str);
 	else if (main->type == D_INPUT_R && main->next->str)
-		new_redirect = ft_init_redirect_box(D_INPUT_R, main->next->str);
+		new_redirect = ft_init_redirect_box(D_OUT_FILE, main->next->str);
 	else if (main->type == D_OUTPUT_R && main->next->str)
-		new_redirect = ft_init_redirect_box(D_OUTPUT_R, main->next->str);
+		new_redirect = ft_init_redirect_box(D_IN_FILE, main->next->str);
 	ft_add_redirect_box(redirect, new_redirect);
 	return (*redirect);
 }

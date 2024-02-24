@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_box.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 19:07:26 by fatturan          #+#    #+#             */
-/*   Updated: 2024/01/28 12:53:58 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:17:14 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_add_exec_box(t_execute **exec, t_execute *new_exec)
 			temp->next = new_exec;
 		}
 	}
-		
+
 }
 
 t_execute	*ft_init_exec_box(char *str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   boxing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 12:32:45 by fatturan          #+#    #+#             */
-/*   Updated: 2024/02/18 15:33:04 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:52:12 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_send_box(t_command *cmd, t_parser **main)
 {
-	if((*main)->type == ARG)
+	if ((*main)->type == ARG)
 		cmd->exec = ft_exec_box(&cmd->exec, *main);
-	else if((*main)->type == OUTPUT_R || (*main)->type == INPUT_R)
+	else if ((*main)->type == OUTPUT_R || (*main)->type == INPUT_R)
 		cmd->redirect = ft_redirect_box(&cmd->redirect, *main);
-	else if((*main)->type == D_OUTPUT_R || (*main)->type == D_INPUT_R)
+	else if ((*main)->type == D_OUTPUT_R || (*main)->type == D_INPUT_R)
 		cmd->redirect = ft_redirect_box(&cmd->redirect, *main);
 }
 
@@ -50,11 +50,12 @@ t_command	*ft_init_cmd(void)
 
 void	ft_cmd_box(t_parser *main)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
-	g_glbl.cmd = NULL;
 	cmd = NULL;
-	while(main)
+	g_glbl.cmd = NULL;
+	g_glbl.cmd_count = 0;
+	while (main)
 	{
 		if (main->type == PIPE || main->prev == NULL)
 		{
@@ -62,10 +63,9 @@ void	ft_cmd_box(t_parser *main)
 				main = main->next;
 			cmd = ft_init_cmd();
 			ft_add_box(cmd);
-			g_glbl.cmd_count++;
+			g_glbl.cmd_count += 1;
 		}
 		ft_send_box(cmd, &main);
 		main = main->next;
 	}
-	g_glbl.cmd = cmd;
 }

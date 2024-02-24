@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/02/19 13:09:33 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:09:03 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <string.h>
+# include <fcntl.h>
+# include <dirent.h>
 
 enum e_token
 {
@@ -30,6 +32,8 @@ enum e_token
 	PIPE,
 	IN_FILE,
 	OUT_FILE,
+	D_IN_FILE,
+	D_OUT_FILE,
 	NONE,
 };
 
@@ -50,11 +54,12 @@ typedef struct s_redirect
 
 typedef struct s_command
 {
+	int	fd[2];
+	pid_t	p_pid;
 	t_execute			*exec;
 	t_redirect			*redirect;
-	struct s_command 	*next;
+	struct s_command	*next;
 	struct s_command 	*prev;
-	
 }				t_command;
 
 typedef struct s_parser
@@ -69,12 +74,16 @@ typedef struct s_glbl
 {
 	char				**env;
 	char				**export;
+	char 				**path;
+	char				*input;
 	t_command			*cmd;
 	int					exp_plus_flag;
 	int					cmd_count;
+	int					fd[2];
+	int					heredoc;
 }						t_glbl;
 
-t_glbl			g_glbl;
+t_glbl			 g_glbl;
 void		init_envair(char **env);
 
 //minishell_utils_bet
@@ -141,7 +150,7 @@ void		ft_process(void);
 void		ft_print_split(char **str);
 void		ft_printlist(t_parser *parser);
 void		ft_error(void);
-void		ft_free_2D(char **str);
+void		ft_free_2d(char **str);
 
 // utils1
 void		pass_whitespaces(char *str, int *index);
@@ -172,5 +181,16 @@ void		determine_type(t_parser *pars);
 
 //exec
 void	ft_process_cmd(void);
+void	ft_action(t_command *cmd);
 
+//fd
+void	ft_close_all_fd(void);
+
+//path
+void	ft_fill_path(void);
+char	*get_path(char *cmd);
+
+//exec err
+
+void	ft_command_err(char *cmd);
 #endif

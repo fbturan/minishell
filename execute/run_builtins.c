@@ -6,15 +6,35 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:48:54 by fatturan          #+#    #+#             */
-/*   Updated: 2024/02/19 14:12:33 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:47:30 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+//void	ft_wait_cmd(void)
+//{
+//	t_command	*cmd;
+
+//	cmd = g_glbl.cmd;
+//	close_all_fd();
+//	while (cmd != NULL)
+//	{
+//		if (cmd->pid != -1)
+//		{
+//			waitpid(cmd->pid, &errno, 0);
+//			if (WIFEXITED(errno))
+//				g_glbl.erorno = WEXITSTATUS(errno);
+//			else if (WIFSIGNALED(errno))
+//				g_glbl.erorno = 128 + WTERMSIG(errno);
+//		}
+//		cmd = cmd->next;
+//	}
+//}
+
 int	ft_process_builtins(t_command *cmd)
 {
-	t_command *tmp_cmd;
+	t_command	*tmp_cmd;
 
 	tmp_cmd = cmd;
 	if (tmp_cmd == NULL)
@@ -23,16 +43,16 @@ int	ft_process_builtins(t_command *cmd)
 	//	ft_cd(tmp_cmd);
 	//else if (ft_is_equal(cmd->exec->value, "echo"))
 	//	ft_echo(tmp_cmd);
-	//else if (ft_is_equal(cmd->exec->value, "env"))
+	//if (ft_is_equal(cmd->exec->value, "env"))
 	//	ft_env(tmp_cmd->exec);
 	//else if (ft_is_equal(cmd->exec->value, "exit"))
 	//	ft_exit(tmp_cmd);
-	//else if (ft_is_equal(cmd->exec->value, "export"))
+	//if (ft_is_equal(cmd->exec->value, "export"))
 	//	ft_export(tmp_cmd);
-	else if (ft_is_equal(cmd->exec->value, "pwd"))
-		ft_pwd();
 	//else if (ft_is_equal(cmd->exec->value, "unset"))
 	//	ft_unset(tmp_cmd);
+	//else if (ft_is_equal(cmd->exec->value, "pwd"))
+	//	ft_pwd();
 	else
 		return (0);
 	return (1);
@@ -58,14 +78,14 @@ int	ft_is_builtin(t_command *cmd)
 	//	return (1);
 	//else if (ft_is_equal(cmd->exec->value, "echo"))
 	//	return (1);
-	//else if (ft_is_equal(cmd->exec->value, "env"))
+	//if (ft_is_equal(cmd->exec->value, "env"))
 	//	return (1);
 	//else if (ft_is_equal(cmd->exec->value, "exit"))
 	//	return (1);
-	//else if (ft_is_equal(cmd->exec->value, "export"))
+	//if (ft_is_equal(cmd->exec->value, "export"))
 	//	return (1);
-	 if (ft_is_equal(cmd->exec->value, "pwd"))
-		return (1);
+	// if (ft_is_equal(cmd->exec->value, "pwd"))
+	//	return (1);
 	//else if (ft_is_equal(cmd->exec->value, "unset"))
 	//	return (1);
 	return (0);
@@ -73,20 +93,21 @@ int	ft_is_builtin(t_command *cmd)
 
 void	ft_process_cmd(void)
 {
-	t_command  *cmd;
+	t_command	*cmd;
 
 	cmd = g_glbl.cmd;
 	if (!cmd)
 		return ;
+	ft_fill_heredoc();
 	if (cmd->exec && g_glbl.cmd_count == 1 && ft_is_builtin(cmd))
 	{
 		ft_run_builtins(cmd);
-		//cmd = cmd->next;
+		cmd = cmd->next;
 	}
-	//while (cmd)
-	//{
-	//	//
-	//	cmd =  cmd->next;
-	//}
+	while (cmd)
+	{
+		ft_action(cmd);
+		cmd =  cmd->next;
+	}
 	//ft_wait_cmd();
 }

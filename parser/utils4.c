@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 06:28:38 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/04 16:32:45 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:11:50 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ void	determine_type(t_parser *pars)
 	while (pars != NULL)
 	{
 		if (pars->str[0] == '>' && pars->str[1] == '>' && !(pars->str[2]))
-			pars->type = D_INPUT_R;
-		else if (pars->str[0] == '<' && pars->str[1] == '<' && !(pars->str[2]))
 			pars->type = D_OUTPUT_R;
+		else if (pars->str[0] == '<' && pars->str[1] == '<' && !(pars->str[2]))
+			pars->type = D_INPUT_R;
 		else if (pars->str[0] == '>' && !(pars->str[1]))
-			pars->type = INPUT_R;
-		else if (pars->str[0] == '<' && !(pars->str[1]))
 			pars->type = OUTPUT_R;
+		else if (pars->str[0] == '<' && !(pars->str[1]))
+			pars->type = INPUT_R;
 		else if (pars->str[0] == '|' && !(pars->str[1]))
 			pars->type = PIPE;
 		else

@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:56:27 by fatturan          #+#    #+#             */
-/*   Updated: 2024/02/18 18:08:23 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:10:56 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	ft_env(t_execute *exec)
 		if (!tmp[1])
 			printf("%s\"\"\n", tmp[0]);
 		i++;
-		ft_free_2D(tmp);
+		ft_free_2d(tmp);
 	}
 }

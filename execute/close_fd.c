@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   close_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/02/24 13:37:26 by fatturan         ###   ########.fr       */
+/*   Created: 2024/02/20 18:48:42 by kpolatci          #+#    #+#             */
+/*   Updated: 2024/02/24 14:05:06 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(int argc, char **argv, char **env)
+//void	close_heredoc_fd(t_command *cmd)
+//{
+//	if (contain_heredoc() && cmd->heredoc_fd[0] > 2)
+//		close(cmd->heredoc_fd[0]);
+//}
+
+void	ft_close_all_fd(void)
 {
-	init_envair(env);
-	ft_fill_path();
-	ft_process();
+	t_command	*cmd;
+
+	cmd = g_glbl.cmd;
+	while (cmd)
+	{
+		//close_heredoc_fd(cmd);
+		if (cmd->fd[0] > 2)
+			close(cmd->fd[0]);
+		if (cmd->fd[1] > 2)
+			close(cmd->fd[1]);
+		cmd = cmd->next;
+	}
 }

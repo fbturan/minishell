@@ -31,9 +31,9 @@ void	*ft_calloc(int count, int size)
 	return (ptr);
 }
 
-static int	str_in_array(const char *s, char delimiter)
+unsigned int	str_in_array(const char *s, char delimiter)
 {
-	int	count;
+	unsigned int	count;
 
 	count = 0;
 	while (*s)
@@ -50,11 +50,30 @@ static int	str_in_array(const char *s, char delimiter)
 	return (count);
 }
 
+size_t	ft_strlcpy2(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size > 0)
+	{
+		while (src[i] && i < (size - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = 0;
+	}
+	while (src[i])
+		i++;
+	return (i);
+}
+
 char	**ft_split(char *s, char c)
 {
 	char			**arr;
-	int	j;
-	int	a;
+	unsigned int	j;
+	unsigned int	a;
 
 	if (!s)
 		return (NULL);
@@ -72,7 +91,7 @@ char	**ft_split(char *s, char c)
 			while (*s != c && *s && ++j)
 				s++;
 			arr[++a -1] = (char *) ft_calloc(j + 1, sizeof(char));
-			ft_strlcpy(arr[a -1], s - j, j + 1);
+			ft_strlcpy2(arr[a -1], s - j, j + 1);
 		}
 	}
 	return (arr);
